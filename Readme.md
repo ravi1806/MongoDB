@@ -26,11 +26,12 @@
 * Q: Write a query that finds all wands where the creator is "Moonsap".
 * A: db.wands.find({"creator":"Moonsap"})
 * Q: Some wands require more experience than others. Let's record the minimum level needed to use a wand in a field named level_required. This particular wand requires level 10.We would never think of selling our wand, but it's fun to know how much it's worth anyway. Let's record the price of our wand in a field named price. This particular wand is worth 34.9 gems.Each wand can have any number of special powers, like Fire, Teleportation, or Energy. Let's record all of these power options in a field named powers. This particular wand has powers of "Fire" and "Love", which should be stored in an array.The value of the damage field should be an object with 2 properties. The magic property for this wand is 4, and the melee property is 2.
-* A: db.wands.insert({
-  "name": "Dream Bender",
-  "creator": "Foxmond",
-  "level_required": 10,
-  "price": 34.9,
-  "powers": ["Fire","Love"],
-  "damage": { magic : 4, melee: 2} })
- 
+* A: ``` 
+db.wands.insert({
+"name": "Dream Bender",
+"creator": "Foxmond",
+"level_required": 10,
+"price": 34.9,
+"powers": ["Fire","Love"],
+"damage": { magic : 4, melee: 2} })
+``` 
