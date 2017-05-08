@@ -39,3 +39,17 @@
   "powers": ["Fire","Love"],
   "damage": { magic : 4, melee: 2} })
   ``` 
+
+## Removing and Updating Document
+
+* The remove() collection method will delete documents that match the provided query. eg. `db.potions.remove({'name':'love'})`//will remove all the documents with name: love
+* To remove all documents of a collection use `db.potions.remove ( {} )`
+* The update() method is used as `db.potions.update({'name':'love'}, {'$set':{'price': 3} })`
+* This method only apllies to the first matching document.
+* To perform updates in multiple documents use an extra parameter as `{ "multi": true }`
+* In update the first object passed is the query parameter. Based on this the document will be found. Next object is the update we want in. We need to pass the $set update parameter and the object to be updated.
+* We get the WriteResult as an object of 3 entries. 1) nMatched: No. of docs matched. 2) nUpserted: No. of docs created 3)nModified: No. of docs modified. 
+* Updating without an operator will delete everything on the document there was before(except _ id) and only insert the new data. This is used for overwriting documents.
+* $inc update operator will increment the variable by the specified amount. { "$inc": {"count":1} } //this will inc count by 1 everytime. If the field doesn't exist, it gets created with the value count: 1.
+* Adding another parameter {"upsert": true} in the update method will create an instance of document right there if it didn't exist before and will add the values of the query to it.
+* 
