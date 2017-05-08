@@ -13,7 +13,10 @@
 * ` db.potions.insert ( { "name": "Inivisibility", "vendor": "Kettlecooked" } ) ` //The potions collections will be created right here if it didnt exist
 * Whenver we write to db, we'll be returnd a **WriteResult** object that tells if the operation was successful or not.
 * To fetch all the documents in a collection we use find method. eg. db.potions.find().
-
+* Dates can be added as ISODate object `'tryDate': new Date(YYYY, MM, DD)`. Dates get converted to ISO format when saved in the db.
+* Array values are treated individually, which means we can query them by specifying the field of the array and the value we'd like to find.
+* Object values are found using dot notation. eg. db.potions.find({ "ratings.flavor": 5 }).
+* Validations supported by mongoDB are-> 1) id should be unique 2) No syntax errors 3) Document is less than 16mb.
 
 * Q: A MongoDB shell has been started below, so write the command that will set the current database to wandRecorder.
 * A: ` use wandRecorder `
