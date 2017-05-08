@@ -52,4 +52,13 @@
 * Updating without an operator will delete everything on the document there was before(except _ id) and only insert the new data. This is used for overwriting documents.
 * $inc update operator will increment the variable by the specified amount. { "$inc": {"count":1} } //this will inc count by 1 everytime. If the field doesn't exist, it gets created with the value count: 1.
 * Adding another parameter {"upsert": true} in the update method will create an instance of document right there if it didn't exist before and will add the values of the query to it.
-* 
+* Q: Write the command to remove the wand with the name of "Doom Bringer" from our wands collection.
+* A: `db.wands.remove({"name":"Doom Bringer"});`
+* Q: let's remove any wands containing 'Death' in their powers.
+* A: `db.wands.remove({'powers': 'Death'})` 
+* Q: The makers of the "Devotion Shift" wand have decided to reduce its price since no one is showing interest in their luxury wand.
+* A: `db.wands.update({'name': 'Devotion Shift'}, {'$set': {'price': 5.99}})`
+* Q: The Grand House of Magic recently passed a law that all wands with "Fire" in their list of powers must increase their  level_required field by 2. We need to update all wands that have been affected by the new law.
+* A:`db.wands.update( {'powers': 'Fire'}, {'$inc': {'level_required': 2}}, {'multi': true} )`
+
+
