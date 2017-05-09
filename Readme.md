@@ -43,7 +43,7 @@
 ## Removing and Updating Document
 
 * The remove() collection method will delete documents that match the provided query. eg. `db.potions.remove({'name':'love'})`//will remove all the documents with name: love
-* To remove all documents of a collection use `db.potions.remove ( {} )`
+* To remove all documents of a collection use `db.potions.remove ( {} )`. // {} is a query for all documents.
 * The update() method is used as `db.potions.update({'name':'love'}, {'$set':{'price': 3} })`
 * This method only apllies to the first matching document.
 * To perform updates in multiple documents use an extra parameter as `{ "multi": true }`
@@ -61,4 +61,17 @@
 * Q: The Grand House of Magic recently passed a law that all wands with "Fire" in their list of powers must increase their  level_required field by 2. We need to update all wands that have been affected by the new law.
 * A:`db.wands.update( {'powers': 'Fire'}, {'$inc': {'level_required': 2}}, {'multi': true} )`
 
+#### Deleting a Field
+* To remove a field (of a field-value pair) we need to use the $unset operator. 
+* eg. `db.potions.update( { }, { '$unset': { 'colors': ''}  }, { 'multi': true } )` // {} is a query for all the documents. $unset parameter will delete the entire field so the value for colors field doesnt matter. 'multi' is for all documents.
 
+#### Renaming a Field
+* To rename a field we use the $rename operator
+* eg. `db.potions.update( { }, { '$renamne': { 'score': 'grade' } }, { 'multi': true } )`// This will rename the score field to grade
+
+### To update an Array value
+* To update an array value use the dot notation. eg.  `db.potions.update( {'ingredients':'secret'}, {'$set': {'ingredients.1': 34 } }`
+* We can use a **positional operator** to set the array value of the location isnt same in all documents. eg. `db.potions.update( {'ingredients':'secret'}, { '$set': {'ingredients.$': 42}, {'multi': true} ) `. An important note is that only the first matched 'secret' will be changed to 42 in the array. multi true will act for multiple documents and not for multiple cases of 'secret' in the array. $ only matches the first instance in array.
+
+### To update an Object value
+* To update an object value use the dot notation eg. `db.potions.update( {'name': 'shrinking'}, {'$set': 'ratings.strength': 5 } )`
