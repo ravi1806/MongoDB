@@ -39,6 +39,23 @@
   "powers": ["Fire","Love"],
   "damage": { magic : 4, melee: 2} })
   ``` 
+## Getting Started 
+
+* Download the latest community version from mongodb website.
+* Untar the file by command tar avf 'filename'
+* Go to the bin directory 
+* Inside bin there is mongo and mongod, mongo is the shell program that connects to the db, mongod is the server.
+* The server mongod will keep its data in the /data/db directory by default. So we must create the path.
+* To do that we need root privelages by sudo bash
+* Then mkdir -p /data/db .. We need to use -p becaouse it stands for parents. no error if data was existing else make a new dir data and make another dir db inside it. 
+* Then give the permission to user by using chmod 777 to data first and then data/db
+* Start the server by ./mongod ( u need to be inside bin folder of the extracted folder )
+* By default server listens on port 27017
+* start mongo shell by giving command mongo
+* copy all files of this bin folder to /usr/local/bin
+* exit route and type which mongod to check
+* show dbs
+* use dbname wll create the db if it wasnte existing, and switch to it.
 
 ## Removing and Updating Document
 
