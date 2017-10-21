@@ -42,7 +42,7 @@
 ## Getting Started 
 
 * Download the latest community version from mongodb website.
-* Untar the file by command tar avf 'filename'
+* Untar the file by command tar xvf 'filename'
 * Go to the bin directory 
 * Inside bin there is mongo and mongod, mongo is the shell program that connects to the db, mongod is the server.
 * The server mongod will keep its data in the /data/db directory by default. So we must create the path.
