@@ -195,6 +195,10 @@ MongoClient.connect('mongodb://localhost:27017/video', function(err, db) {
 });
 
 ```
+## Get requests in express
+```js
+
+```
 ## Removing and Updating Document
 
 * The remove() collection method will delete documents that match the provided query. eg. `db.potions.remove({'name':'love'})`//will remove all the documents with name: love
