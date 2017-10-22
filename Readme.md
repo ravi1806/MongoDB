@@ -267,6 +267,65 @@ var server = app.listen(3000, function() {
     console.log('Express server listening on port %s.', port);
 });
 ```
+## Homework 1_1
+```js
+sudo mongod --dbpath=/data/db
+mongorestore dump
+mongo
+> show dbs
+admin  0.000GB
+local  0.000GB
+m101   0.000GB
+test   0.000GB
+video  0.000GB
+> use m101
+switched to db m101
+> show collections
+hw1_1
+> db.hw1_1.find();
+{ "_id" : ObjectId("51e4524ef3651c651a42331c"), "answer" : "Hello from MongoDB!" }
+```
+## Homework 1_2
+```js
+cd hw1-2
+mongorestore dump
+mongo
+show dbs
+admin  0.000GB
+local  0.000GB
+m101   0.000GB
+test   0.000GB
+video  0.000GB
+> use m101
+switched to db m101
+> show collections
+hw1_1
+hw1_2
+> db.hw1_2.find();
+{ "_id" : "uAM3HHE7lgQOyGMICDxW" }
+> exit
+```
+## Homework 1_3
+```js
+cd hw1-3
+mongorestore dump
+mongo
+> show dbs
+admin  0.000GB
+local  0.000GB
+m101   0.000GB
+test   0.000GB
+video  0.000GB
+> use m101
+switched to db m101
+> show collections
+hw1_1
+hw1_2
+hw1_3
+> db.hw1_3.find();
+{ "_id" : "2AwjZXoQ2jewWjcB5L0E" }
+```
+
 ## Removing and Updating Document
 
 * The remove() collection method will delete documents that match the provided query. eg. `db.potions.remove({'name':'love'})`//will remove all the documents with name: love
