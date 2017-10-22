@@ -57,6 +57,41 @@
 * show dbs
 * use dbname wll create the db if it wasnte existing, and switch to it.
 
+## Intro to creating and deleting documents.
+
+* use video //now our db is video
+* db.movies.insertOne({'movieName': 'La La Land', 'year': 2916}); // this is like video.movies.insertOne
+* db.movies.insertOne({'movieName': 'Lola', 'year': 2912}); 
+* db.movies.find();
+* db.movies.find().pretty();
+* db.movies.find({'title': 'La La Land'}).pretty();
+* the return of find is a cursor object, NOT an array of documents. 
+* So we can have var c = db.movies.find();
+* let c = db.movies.find();
+* c.hasNext() // will return true
+* c.next()
+* c.next()
+
+## Hello, World on nodejs
+* Make a file app.js
+```js
+const http = require('http'); //inbuilt node library has http
+const server = http.createServer(function(request, response) {
+        response.writeHead(200, {"Content-Type": "text/plain"}); // Do this for any request
+        response.end('Hello, World!!\n'); // Send response
+});
+
+server.listen(8000);
+console.log('Server running at http://localhost:8000');
+```
+* node app.js
+* run in browser localhost:8000
+
+## Intro to Nodejs driver
+
+* ```js
+
+```
 ## Removing and Updating Document
 
 * The remove() collection method will delete documents that match the provided query. eg. `db.potions.remove({'name':'love'})`//will remove all the documents with name: love
