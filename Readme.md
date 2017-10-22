@@ -72,7 +72,7 @@
 * c.next()
 * c.next()
 
-## Hello, World on nodejs
+## Hello, World on nodejs using http
 * Make a file app.js
 ```js
 const http = require('http'); //inbuilt node library has http
@@ -89,7 +89,110 @@ console.log('Server running at http://localhost:8000');
 
 ## Intro to Nodejs driver
 
-* ```js
+```js
+var MongoClient = require('mongodb').MongoClient,
+    assert = require('assert'); //assert is used for error checking
+
+var url = 'mongodb://localhost:27017/video'; // this is where our mongod hosts the server and we look in video db
+
+MongoClient.connect(url, function(err, db) {
+
+    assert.equal(null, err);
+    console.log("Successfully connected to server");
+
+    // Find some documents in our collection, fnd returns a cursor so we convert it to an array 
+    db.collection('movies').find({}).toArray(function(err, docs) {
+
+        // Print the documents returned
+        docs.forEach(function(doc) {
+            console.log(doc.title);
+        });
+
+        // Close the DB
+        db.close();
+    });
+
+    // Declare success
+    console.log("Called find()");
+}); 
+```
+## Intro to express hello world
+```js
+var express = require('express'),
+    app = express();
+
+app.get('/', function(req, res){
+    res.send('Hello World');
+});
+
+app.use(function(req, res){
+    res.sendStatus(404); 
+});
+
+var server = app.listen(3000, function() {
+    var port = server.address().port;
+    console.log('Express server listening on port %s', port);
+});
+
+```
+## Intro to templates hello world
+```js
+var express = require('express'),
+    app = express(),
+    engines = require('consolidate'); // a wrapper for number of template engines
+
+app.engine('html', engines.nunjucks); // registering nunjucks 
+app.set('view engine', 'html'); // we will end up using this engine for html
+app.set('views', __dirname + '/views'); // full path to directory in which our template is in
+
+app.get('/', function(req, res) {
+    res.render('hello', { name : 'Templates' }); // use render instead of send, and send data as param
+});
+
+app.use(function(req, res){
+    res.sendStatus(404); 
+});
+
+var server = app.listen(3000, function() {
+    var port = server.address().port;
+    console.log('Express server listening on port %s', port);
+});
+```
+## All together now (express, template engine and node drivers)
+```js
+var express = require('express'),
+    app = express(),
+    engines = require('consolidate'),
+    MongoClient = require('mongodb').MongoClient,
+    assert = require('assert');
+
+app.engine('html', engines.nunjucks);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
+MongoClient.connect('mongodb://localhost:27017/video', function(err, db) {
+
+    assert.equal(null, err);
+    console.log("Successfully connected to MongoDB.");
+
+    app.get('/', function(req, res){
+
+        db.collection('movies').find({}).toArray(function(err, docs) {
+            res.render('movies', { 'movies': docs } );
+        });
+
+    });
+
+    app.use(function(req, res){
+        res.sendStatus(404);
+    });
+    
+    var server = app.listen(3000, function() {
+        var port = server.address().port;
+        console.log('Express server listening on port %s.', port);
+    });
+
+});
 
 ```
 ## Removing and Updating Document
