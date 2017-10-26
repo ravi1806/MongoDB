@@ -325,6 +325,33 @@ hw1_3
 > db.hw1_3.find();
 { "_id" : "2AwjZXoQ2jewWjcB5L0E" }
 ```
+## CRUD
+
+### Creating Documents
+* unique _id for all documents.
+* We cab add the _id in advance and not use default _id of mongodb
+* db.collectionName.insertMany([{document1}, {document2}, {document3}, {document4}]);
+* If we try to insert a document with duplicate id, it will throw an error and won't insert it.
+* While doing insertMany if theres a duplicate then it will insert all the documents above the duplicate document and will throw error when the duplicate document is processed to be inserted.
+* This is because by default insertMany inserts in an ordered manner. We can change this parameter by passing an additional object after the array in insertMany which will let all other documents to be inserted in case of an error occurence.
+* db.collection.insertMany([{doc1}, {doc2}, {doc3}], {"ordered": false});
+* insertOne(), insertMany() and Update/Upsert Commands are used for creating a document.
+
+### About _id structure
+* 12 byte hex string
+* Returns a new ObjectId value. The 12-byte ObjectId value consists of:
+
+* a 4-byte value representing the seconds since the Unix epoch,
+* a 3-byte machine identifier,
+* a 2-byte process id, and
+* a 3-byte counter, starting with a random value.
+* ObjectId() can accept the following parameter:
+
+### Reading Documents
+* db.collection.find({documentKey: documentValue});
+* db.collection.find({rated: "PG-13"}).count(); //wil lgive the count of no. of matches found, the first element(here rated: "PG=13" is called the query document. we can add more selectors to restrict the result set to only match this criteria eg. db.collection.find({rated: "PG-13", year: 2000}); the query parameters are ANDed.
+* The documentKey should always be wrapped in double quotes as a good practice cos dot notation doesnt work otherwise.
+* 
 
 ## Removing and Updating Document
 
